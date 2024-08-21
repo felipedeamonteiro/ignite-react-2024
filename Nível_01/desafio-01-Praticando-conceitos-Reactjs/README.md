@@ -24,3 +24,18 @@ Para completar esse desafio, você pode necessitar de pesquisas para aprender so
 Caso queira se aprofundar ainda mais em conceitos do React, recomendamos ler a nova documentação beta do React, que explica profundamente sobre conceitos do React e como pensar no design de aplicações React.
 
 Figma da aplicação: [link](https://www.figma.com/file/d41zqVJRI0MSoyv6dPu8RX/ToDo-List-%E2%80%A2-Desafio-React-Copy?fuid=895716758038981057)
+
+## Como rodar e Layout
+
+O projeto foi feito com `Node` na versão `v20.10.0`.
+
+Primeiramente intale as dependências:
+```
+npm install
+```
+E depois rode:
+```
+npm run dev
+```
+Layout da aplicação finalizada:
+![](./src/assets/Todo-Page.png)
