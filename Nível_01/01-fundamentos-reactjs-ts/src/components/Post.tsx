@@ -1,27 +1,48 @@
-/* eslint-disable react/prop-types */
-import {useState} from 'react';
+import {useState, FormEvent, ChangeEvent} from 'react';
 import {Avatar} from './Avatar';
 import {Comment} from './Comment';
 import styles from './Post.module.css';
 import {format, formatDistanceToNow} from 'date-fns';
 import {ptBR} from 'date-fns/locale';
 
-export function Post({ author, content, publishedAt }) {
+interface Author {
+  name: string;
+  avatarUrl: string;
+  role: string;
+};
+
+interface Content {
+  type: 'paragraph' | 'link' | string;
+  content: string;
+};
+
+export interface PostType {
+  id: number;
+  author: Author;
+  content: Content[];
+  publishedAt: Date;
+}
+
+interface PostProps {
+  post: PostType;
+};
+
+export function Post({ post }: PostProps) {
   const [comments, setComments] = useState(['Post Bacana!']);
   const [newCommentText, setNewCommentText] = useState('');
 
-  const publishedDateFormated = format(publishedAt, "d 'de' LLLL 'de' yyyy 'às' HH:mm'h'", { locale: ptBR });
+  const publishedDateFormated = format(post.publishedAt, "d 'de' LLLL 'de' yyyy 'às' HH:mm'h'", { locale: ptBR });
 
-  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, { locale: ptBR, addSuffix: true });
+  const publishedDateRelativeToNow = formatDistanceToNow(post.publishedAt, { locale: ptBR, addSuffix: true });
 
-  function handleCreateNewComment(e) {
+  function handleCreateNewComment(e: FormEvent) {
     e.preventDefault();
     
     setComments([...comments, newCommentText]);
     setNewCommentText('');
   };
 
-  function handleDeleteComment(commentToDelete) {
+  function handleDeleteComment(commentToDelete: string) {
     setComments(comments.filter(comment => comment !== commentToDelete));
   }
 
@@ -29,20 +50,20 @@ export function Post({ author, content, publishedAt }) {
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <Avatar src={author.avatarUrl} />
+          <Avatar src={post.author.avatarUrl} />
           <div className={styles.authorInfo}>
-            <strong>{author.name}</strong>
-            <span>{author.role}</span>
+            <strong>{post.author.name}</strong>
+            <span>{post.author.role}</span>
           </div>
         </div>
 
-        <time title={publishedDateFormated} dateTime={publishedAt.toISOString()}>
+        <time title={publishedDateFormated} dateTime={post.publishedAt.toISOString()}>
           {publishedDateRelativeToNow}
         </time>
       </header>
 
       <div className={styles.content}>
-        {content.map((item) => {
+        {post.content.map((item) => {
           if (item.type === 'paragraph') {
             return <p key={item.content}>{item.content}</p>;
           } else if (item.type === 'link') {
@@ -56,13 +77,13 @@ export function Post({ author, content, publishedAt }) {
 
         <textarea
           value={newCommentText}
-          onChange={e => {
+          onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
             e.target.setCustomValidity('')
             setNewCommentText(e.target.value)
           }}
           placeholder='Deixe um comentário'
           required
-          onInvalid={e => e.target.setCustomValidity('Esse campo é obrigatório!')}
+          onInvalid={(e: ChangeEvent<HTMLTextAreaElement>) => e.target.setCustomValidity('Esse campo é obrigatório!')}
         />
 
         <footer>
