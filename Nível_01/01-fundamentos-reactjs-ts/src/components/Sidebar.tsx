@@ -14,10 +14,10 @@ export function Sidebar() {
       </div>
 
       <footer>
-        <a href="#">
+        <button>
           <PencilLine size={20} />
-          Editar seu perfil
-        </a>
+          Criar Post
+        </button>
       </footer>
     </aside>
   );

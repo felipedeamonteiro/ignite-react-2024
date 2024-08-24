@@ -36,7 +36,7 @@
   padding: 1.5rem 2rem 2rem;
 }
 
-.sidebar footer a {
+.sidebar footer button {
   width: 100%;
   background: transparent;
   color: var(--green-500);
@@ -47,6 +47,7 @@
   font-weight: bold;
   display: block;
   text-decoration: none;
+  cursor: pointer;
 
   display: flex;
   align-items: center;
@@ -57,7 +58,7 @@
   transition: color 0.1s, background-color 0.1s;
 }
 
-.sidebar footer a:hover {
+.sidebar footer button:hover {
   background: var(--green-500);
   color: var(--white);
 }
