@@ -15,6 +15,30 @@
       "category": "Alimentação",
       "price": 23.5,
       "createdAt": "2024-08-25T06:54:00.988Z"
+    },
+    {
+      "id": 3,
+      "description": "Ignite Rocketseat",
+      "type": "outcome",
+      "category": "Educação",
+      "price": 1980,
+      "createdAt": "2024-03-25T06:54:00.988Z"
+    },
+    {
+      "category": "Venda",
+      "description": "Desenvolviment o de App",
+      "price": 10000,
+      "type": "income",
+      "createdAt": "2024-09-02T04:19:17.019Z",
+      "id": 4
+    },
+    {
+      "description": "Pizza",
+      "type": "outcome",
+      "category": "Alimentação",
+      "price": 100,
+      "createdAt": "2024-09-02T04:30:50.812Z",
+      "id": 5
     }
   ]
 }
