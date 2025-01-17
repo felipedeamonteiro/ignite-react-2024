@@ -5,7 +5,7 @@ import { Label } from '@/components/ui/label';
 import { Helmet } from 'react-helmet-async';
 import * as z from 'zod';
 import { toast } from 'sonner';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { signIn } from '@/api/sign-in';
 
@@ -16,13 +16,20 @@ const signInSchema = z.object({
 type SignInForm = z.infer<typeof signInSchema>;
 
 export function SignIn() {
+  const [searchParams] = useSearchParams();
+
   //Só para ficar registrado, o handleSubmit é uma função que recebe uma função de callback que será executada quando o formulário for submetido. E isso é uma high order function, ou seja, uma função que retorna outra função.
   const {
     register,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<SignInForm>();
+  } = useForm<SignInForm>({
+    defaultValues: {
+      email: searchParams.get('email') ?? '',
+    },
+  });
 
+  // Todo POST, PUT e DELETE são mutações, então usamos o useMutation. O GET  é uma query.
   const { mutateAsync: authenticate } = useMutation({
     mutationFn: signIn,
   });
